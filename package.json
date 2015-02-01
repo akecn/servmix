@@ -1,0 +1,28 @@
+{
+  "name": "servmix",
+  "version": "0.0.1",
+  "description": "a pre-compile static server.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon cli.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": {
+    "name": "wuake",
+    "mail": "wgk1987@gmail.com"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^0.18.0",
+    "connect": "^3.3.4",
+    "filo": "0.0.4",
+    "findup-sync": "^0.2.1",
+    "less": "^2.3.1",
+    "lodash": "^3.0.1",
+    "log4js": "^0.6.22",
+    "marked": "^0.3.3",
+    "mime-types": "^2.0.8",
+    "serve-index": "^1.6.0",
+    "serve-static": "^1.8.1"
+  }
+}

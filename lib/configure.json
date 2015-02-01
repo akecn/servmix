@@ -1,0 +1,29 @@
+{
+    "parsers": {
+        "wrap": {
+            "wrapper": "amd"
+        },
+        "html": {
+            "rules": [
+                {
+                    "file": "*.html",
+                    "pattern": "link[rel=import]",
+                    "mappings": [
+                        {
+                            "href": ["**/??tracker.js,index.js"],
+                            "attrs": ["href", "type"],
+                            "replace": "@file"
+                        },
+                        {
+                            "href": ["*/index.css"],
+                            "replace": {
+                                "daily": "",
+                                "online": "http://"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
