@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+var program = require('commander');
+
+program
+  .version('0.0.1')
+  .option('-p, --port [port]', 'server port')
+  .option('-d, --cwd [cwd]', 'server work directory')
+  .parse(process.argv);
+
+var server = require('../server');
+
+server.start({
+    port: program.port,
+    cwd: program.cwd
+});

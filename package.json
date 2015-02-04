@@ -3,8 +3,9 @@
   "version": "0.0.1",
   "description": "a pre-compile static server.",
   "main": "index.js",
+  "bin": "bin/cli",
   "scripts": {
-    "start": "nodemon cli.js",
+    "start": "nodemon bin/cli",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": {
@@ -14,6 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "cheerio": "^0.18.0",
+    "clean-css": "^3.0.8",
+    "commander": "^2.6.0",
     "connect": "^3.3.4",
     "filo": "0.0.4",
     "findup-sync": "^0.2.1",
@@ -22,6 +25,7 @@
     "log4js": "^0.6.22",
     "marked": "^0.3.3",
     "mime-types": "^2.0.8",
+    "minimatch": "^2.0.1",
     "serve-index": "^1.6.0",
     "serve-static": "^1.8.1"
   }

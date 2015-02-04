@@ -1,0 +1,19 @@
+{
+    "ignore": [
+        ".git",
+        "node_modules/**/node_modules"
+    ],
+    "verbose": false,
+    "execMap": {
+        "jst": "node --harmony"
+    },
+    "watch": [
+        "./bin/*",
+        "**/*",
+        "node_modules/filo/lib/filo.js"
+    ],
+    "env": {
+        "NODE_ENV": "development"
+    },
+    "ext": "js json"
+}

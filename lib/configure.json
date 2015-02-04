@@ -1,27 +1,35 @@
 {
-    "parsers": {
+    "rules": [
+        {
+            "expression": "**/*.html",
+            "tasks": ["html"]
+        },
+        {
+            "expression": "**/*.css",
+            "tasks": ["less", "minify"]
+        },
+        {
+            "expression": "**/*+.(md|markdown)",
+            "tasks": ["markdown"]
+        },
+        {
+            "expression": "**/test/*.js",
+            "tasks": ["wrap"]
+        }
+    ],
+    "configure": {
         "wrap": {
             "wrapper": "amd"
         },
         "html": {
-            "rules": [
+            "pattern": "*[data-servmix]",
+            "mappings": [
                 {
-                    "file": "*.html",
-                    "pattern": "link[rel=import]",
-                    "mappings": [
-                        {
-                            "href": ["**/??tracker.js,index.js"],
-                            "attrs": ["href", "type"],
-                            "replace": "@file"
-                        },
-                        {
-                            "href": ["*/index.css"],
-                            "replace": {
-                                "daily": "",
-                                "online": "http://"
-                            }
-                        }
-                    ]
+                    "href": ["../src/??basic.css,index.css"],
+                    "replace": {
+                        "type": "file",
+                        "tasks": ["less", "minify"]
+                    }
                 }
             ]
         }

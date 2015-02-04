@@ -36,6 +36,7 @@ exports.start = function(options) {
 
     app.listen(options.port, function() {
 
+        console.log('start server on %s', options.port);
 //        if(options.noisy === true) {
 //            cmdOpen('http://localhost:' + port, 'google chrome');
 //        }

@@ -1,5 +1,0 @@
-#!/usr/bin/env node
-
-var servmix = require('../servmix');
-
-servmix.server.start();
