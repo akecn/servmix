@@ -25,6 +25,13 @@
             "pattern": "*[data-servmix]",
             "mappings": [
                 {
+                    "href": ["./??index.css,wrap.css"],
+                    "replace": {
+                        "type": "file",
+                        "tasks": ["less", "minify"]
+                    }
+                },
+                {
                     "href": ["../src/??basic.css,index.css"],
                     "replace": {
                         "type": "file",
