@@ -1,4 +1,5 @@
 var Servmix = require('./lib/index');
+var mime = require('mime-types');
 
 /**
  * todo
@@ -13,15 +14,14 @@ module.exports = function(app, options) {
 
         var url = req.url;
 
-        servmix.compile(url, function(err, content, contentType) {
-            if(err || !content) {
+        servmix.compile(url, function(err, file) {
+            if(err) {
                 next();
                 return;
             }
-            // if compile success and send back `content`
-            contentType || (contentType = "text/plain; charset=utf-8");
-            res.setHeader('Content-Type', contentType);
-            res.end(content);
+
+            res.setHeader('Content-Type', mime.contentType(file.ext));
+            res.end(file.contents);
         });
 
     });

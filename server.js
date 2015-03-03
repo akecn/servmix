@@ -16,7 +16,7 @@ exports.start = function(options) {
     var app = connect();
 
     options = _.defaults(options || {}, {
-        cwd: ".",
+        cwd: path.resolve("."),
         port: 8000
     });
 
