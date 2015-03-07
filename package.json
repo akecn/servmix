@@ -18,7 +18,7 @@
     "clean-css": "^3.0.8",
     "commander": "^2.6.0",
     "connect": "^3.3.4",
-    "filo": "0.0.4",
+    "filo": "0.0.7",
     "findup-sync": "^0.2.1",
     "less": "^2.3.1",
     "lodash": "^3.0.1",

@@ -1,14 +1,18 @@
-//var Servmix = require('./lib/index');
-
 var through2 = require('through2');
+var mime = require('mime-types');
+var minimatch = require('minimatch');
 
 var Servmix = {
     rules: []
 };
 
-Servmix.pick = function(url, callback) {
+Servmix.pick = function(url, options, callback) {
+    if(arguments.length === 2) {
+        callback = options;
+    }
     this.rules.push({
-        params: url,
+        options: options,
+        filter: url,
         callback: callback
     });
 };
@@ -16,26 +20,23 @@ Servmix.pick = function(url, callback) {
 Servmix.output = function(options) {
     var self = this;
     return through2.obj(function(file, enc, callback) {
-//        console.log('output:', file);
         callback(null, file);
-    }, function(callback) {
-//        self.trigger(self._host);
+    }, function() {
         var filo = self._host;
         var contents = filo.output();
 
         if (contents) {
 
             filo.contents = contents;
-            filo.ext = filo.files[0].ext;
+            filo.ext = filo.ext || "." + mime.extension(mime.lookup(filo.files[0].path));
 
-//            console.log(filo.contents.toString());
+//            console.log(filo.ext, filo.files.map(function(f) {return f.path;}))
             self._callback(null, filo);
-//            console.log("=-===========");
-            console.log('done');
         } else {
             console.log('fail');
             self._callback(new Error('invalid file'));
         }
+
     });
 };
 
@@ -43,6 +44,36 @@ Servmix.host = function(host, callback) {
     this._host = host;
     this._callback = callback;
 };
+
+Servmix.compile = function() {
+    var filo = this._host;
+    var rule;
+    this.rules.forEach(function(r) {
+        if(filo.files.some(function(file) {
+            return minimatch(file.path, r.filter, {matchBase: true});
+        })) {
+            rule = r;
+            return false;
+        }
+    });
+    if(rule) {
+        var result = rule.callback(filo.stream({
+            filter: rule.filter
+        }), filo);
+
+        if(result && isStream(result)) {
+            result.pipe(Servmix.output());
+        }
+
+    }else {
+        this._callback(new Error('no match rule'));
+    }
+};
+
+var Stream = require('stream').Stream;
+function isStream(o) {
+    return !!o && o instanceof Stream;
+}
 
 module.exports = Servmix;
 

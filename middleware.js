@@ -12,14 +12,13 @@ module.exports = function(app, options) {
 
     app.use(function(req, res, next) {
 
-        var url = req.url;
+        var url = req.url.slice(1);
 
         servmix.compile(url, function(err, file) {
             if(err) {
                 next();
                 return;
             }
-
             res.setHeader('Content-Type', mime.contentType(file.ext));
             res.end(file.contents);
         });
