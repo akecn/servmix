@@ -1,4 +1,4 @@
-var Servmix = require('./lib/index');
+var Servmix = require('./lib/servmix');
 var mime = require('mime-types');
 
 /**

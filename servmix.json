@@ -1,0 +1,19 @@
+{
+    "rules": [
+        {
+            "globs": "*.md",
+            "tasks": "markdown"
+        },
+        {
+            "globs": "*.css",
+            "tasks": ["less", "minify"]
+        },
+        {
+            "globs": ["test/*.js", "!sea.js"],
+            "tasks": [{
+                "name": "wrap",
+                "type": "amd"
+            }, "minify"]
+        }
+    ]
+}
