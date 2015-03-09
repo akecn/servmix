@@ -4,13 +4,13 @@ var mime = require('mime-types');
 /**
  * todo
  */
-module.exports = function(app, options) {
+module.exports = function(options) {
 
     // todo default options setting
 
     var servmix = new Servmix(options);
 
-    app.use(function(req, res, next) {
+    return function(req, res, next) {
 
         var url = req.url.slice(1);
 
@@ -23,6 +23,6 @@ module.exports = function(app, options) {
             res.end(file.contents);
         });
 
-    });
+    };
 
 };

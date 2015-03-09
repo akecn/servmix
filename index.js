@@ -5,3 +5,5 @@ module.exports = Client;
 Client.middleware = require('./middleware');
 
 Client.server = require('./server');
+
+Client.Service = require('./lib/servmix');

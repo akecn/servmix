@@ -4,7 +4,7 @@ var _ = require('lodash'),
     serveIndex = require('serve-index'),
     serveStatic = require('serve-static');
 
-var serveMix = require('./middleware');
+var servemix = require('./middleware');
 
 /**
  *
@@ -22,9 +22,7 @@ exports.start = function(options) {
 
     var cwd = path.resolve(options.cwd);
 
-//    app.use(require('less-middleware')(cwd));
-
-    serveMix(app, options);
+    app.use(servemix(options));
 
     app.use(serveStatic(cwd, {
         index: false
