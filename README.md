@@ -1,10 +1,11 @@
-## Servmix
 
-a pre-compile static server.
+## install
 
-### usage
+```
+(sudo) npm install servmix -g
+```
 
-use in express/connect.
+## use in express/connect.
 
 ```
 var app = new Connect();
@@ -14,7 +15,7 @@ app.use(servmix.middleware(options));
 app.listen(port);
 ```
 
-use in node
+## use in node
 
 ```
 var Servmix = require('servmix').Service;
@@ -27,14 +28,13 @@ servmix.compile(url, function(err, file) {
 });
 ```
 
-use `servmix` as static server.
+## use `servmix` as static server.
 
 ```
-# TODO
-(sudo) npm install servmix -g
-servmix
+servmix --cwd  
 ```
 
+### configure style
 you can config in `servmix.json`:
 
 ```
@@ -59,26 +59,26 @@ you can config in `servmix.json`:
 }
 ```
 
-### default extension 
+#### default extension 
 
-#### less
+##### less
 compile less to css
 
-#### markdown
+##### markdown
 compile markdown to html
 
-#### babel
+##### babel
 compile es6 to es5
 
-#### wrap
+##### wrap
 auto wrap js with `define(function(require, exports, module) { <% ="your code"%> })`
 
-#### minify
+##### minify
 minify js and css code
 
 and also you can extend extension by yourself.
 
-### create your extension
+#### create your extension
 
 set `extend` attribute of `servmix.json`:
 
@@ -100,6 +100,9 @@ module.exports = {
 }
 ```
 
+or `extend` is directory, the file in the directory will be read as extension. just like `lib/extensions/`
+
+### gulp style
 if you don't like configure but code.
 
 create `servmix.js`, and code like this:
