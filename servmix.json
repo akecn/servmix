@@ -2,7 +2,11 @@
     "rules": [
         {
             "globs": "*.md",
-            "tasks": "markdown"
+            "tasks": ["markdown", {
+                "name": "wrap",
+                "header": "<html><body>",
+                "footer": "</body></html>"
+            }]
         },
         {
             "globs": "*.css",
@@ -11,8 +15,7 @@
         {
             "globs": ["test/*.js", "!sea.js"],
             "tasks": [{
-                "name": "wrap",
-                "type": "amd"
+                "name": "wrap"
             }]
         }
     ]

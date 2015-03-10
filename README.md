@@ -80,7 +80,7 @@ and also you can extend extension by yourself.
 
 #### create your extension
 
-set `extend` attribute of `servmix.json`:
+add `extend` property for `servmix.json`:
 
 ```
 {
@@ -88,7 +88,7 @@ set `extend` attribute of `servmix.json`:
 }
 ```
 
-if `extend` is file, then the exports will be your extension. like this
+if `extend` is file, then the exports will be your extensions.
 
 ```
 module.exports = {
@@ -100,23 +100,23 @@ module.exports = {
 }
 ```
 
-or `extend` is directory, the file in the directory will be read as extension. just like `lib/extensions/`
+or `extend` is directory, every file in the directory will be read as an extension. see `lib/extensions/`
 
 ### gulp style
-if you don't like configure but code.
 
-create `servmix.js`, and code like this:
+create `servmix.js`:
 
 ```
 var servmix = require('servmix'),
-    less = require('gulp-less'),
+    babel = require('gulp-babel'),
     through2 = require('through2');
-servmix.request(["*.css", "!reset.css"], function(stream, filo) {
+servmix.request(["*.js", "!sea.js"], function(stream, filo) {
     stream
         .pipe(through2.obj(function(file, enc, callback) {
             // different with gulp. the file may be isNull.because the path come from url.
-            filo.extension(file, '.less');
-            
+            // so change extension
+            filo.extension(file, '.es');
+            // then read the real file.
             if(filo.available(file)) {
                 file.contents = filo.readFile(file);
                 file.stat = filo.fileStat(file);
@@ -124,9 +124,17 @@ servmix.request(["*.css", "!reset.css"], function(stream, filo) {
             callback(null, file);
         }))
         // then just use gulp-plugin
-        .pipe(less());
+        .pipe(babel());
 });
 
 // important!!
 module.exports = servmix;
 ```
+
+## TODO
+* watch config file change
+* html extension
+* pass configure, not only read cfg file.
+* clone example file
+* livereload
+* more extension support?
